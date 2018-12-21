@@ -19,6 +19,7 @@
 #include <vector>
 #include <cassert>
 #include <cerrno>
+#include <cstring>
 #include <cstdlib>
 #include <signal.h>
 #include <sys/ucontext.h>
@@ -28,6 +29,7 @@
 static char const LOG_TAG[] = "LAMBDA_RUNTIME";
 
 namespace aws {
+namespace lambda_runtime {
 
 class signal_manager {
 public:
@@ -94,7 +96,7 @@ void signal_manager::on_signal(int signo, siginfo_t* info, void* ctx)
 void signal_manager::handle_signal(int signo, siginfo_t* info, void* ctx)
 {
     (void)signo; // suppress unused warning
-    (void)info; // suppress unused warning
+    (void)info;  // suppress unused warning
     ucontext_t* uctx = static_cast<ucontext_t*>(ctx);
 #ifdef REG_RIP // x86_64
     void* error_addr = reinterpret_cast<void*>(uctx->uc_mcontext.gregs[REG_RIP]);
@@ -164,9 +166,10 @@ std::string signal_manager::demangle(char const* function_name)
     return function_name;
 }
 
-} // namespace aws
-
 void install_signal_handlers()
 {
     static aws::signal_manager manager;
 }
+
+} // namespace lambda_runtime
+} // namespace aws
