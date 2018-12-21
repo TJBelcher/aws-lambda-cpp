@@ -168,7 +168,7 @@ std::string signal_manager::demangle(char const* function_name)
 
 void install_signal_handlers()
 {
-    static aws::signal_manager manager;
+    static signal_manager manager;
 }
 
 } // namespace lambda_runtime
