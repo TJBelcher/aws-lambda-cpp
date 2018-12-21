@@ -27,8 +27,6 @@
 #include <array>
 #include <cstdlib> // for strtoul
 
-#define AWS_LAMBDA_RUNTIME_API __attribute__((visibility("default")))
-
 namespace aws {
 namespace lambda_runtime {
 

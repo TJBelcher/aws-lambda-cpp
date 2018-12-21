@@ -166,6 +166,7 @@ std::string signal_manager::demangle(char const* function_name)
     return function_name;
 }
 
+AWS_LAMBDA_RUNTIME_API
 void install_signal_handlers()
 {
     static signal_manager manager;

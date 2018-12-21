@@ -18,6 +18,8 @@
 #include <string>
 #include <functional>
 
+#define AWS_LAMBDA_RUNTIME_API __attribute__((visibility("default")))
+
 namespace aws {
 namespace lambda_runtime {
 
