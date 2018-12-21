@@ -23,11 +23,16 @@ return !!strings;
 
 check_cxx_compiler_flag("-Wl,-flto" LTO_CAPABLE)
 
-add_library(${PROJECT_NAME}
-    "src/logging.cpp"
+list(APPEND SOURCE_FILES "src/logging.cpp"
     "src/runtime.cpp"
     "${CMAKE_CURRENT_BINARY_DIR}/version.cpp"
-    )
+)
+
+if(HAVE_BACKTRACE)
+    list(APPEND SOURCE_FILES "src/signal_handlers.cpp")
+endif()
+
+add_library(${PROJECT_NAME} ${SOURCE_FILES})
 
 set_target_properties(${PROJECT_NAME} PROPERTIES VERSION ${PROJECT_VERSION})
 

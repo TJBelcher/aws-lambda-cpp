@@ -124,5 +124,7 @@ inline std::chrono::milliseconds invocation_request::get_time_remaining() const
 // Entry method
 void run_handler(std::function<invocation_response(invocation_request const&)> const& handler);
 
+extern "C" void install_signal_handlers();
+
 } // namespace lambda_runtime
 } // namespace aws
